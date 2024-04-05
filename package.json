@@ -1,0 +1,14 @@
+{
+  "name": "topicos_backend",
+  "version": "1.0.0",
+  "description": "BackEnd de simulador de la clase de Teoria de la simulacion",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Weslin Barahona",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
