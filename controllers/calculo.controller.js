@@ -1,5 +1,7 @@
-import { parse } from "dotenv";
+import { Mongoose } from "mongoose";
+import {simulacion} from "../models/simulationModel.js";
 import { forEach } from "underscore";
+
 
 export const calculodegrafica = async (req, res) => {
   try {
@@ -53,7 +55,21 @@ export const calcIndividual = async (req, res) => {
       depValues: depValues,
     };
 
-    console.log("respuesta", respuesta);
+    //console.log(kValues);
+    //console.log("respuesta", respuesta);
+
+    //Guardado en la base de datos
+
+    const nuevasimulacion = new simulacion ({
+        autor:      "Weslingo",
+        kValues:    23,
+        yValues:    23,
+        iValues:    23,
+        depValues:  23,
+    })
+    await nuevasimulacion.save();
+
+    
 
     return res.status(200).json({ respuesta });
   } catch (error) {

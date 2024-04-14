@@ -4,8 +4,7 @@ import 'dotenv/config'
 import "./database/conectionDB.js"
 import "./config/confgMongoose.js"
 import calculoRoute from "./routes/calculo.route.js";
-
-
+import { simulacion } from "./models/simulationModel.js";
 const app = express();
 
 app.use(cors());
