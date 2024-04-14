@@ -1,10 +1,12 @@
 import express, { Router } from "express";
 import cors from "cors";
-import dotenv from "dotenv";
+import 'dotenv/config'
+import "./database/conectionDB.js"
+import "./config/confgMongoose.js"
 import calculoRoute from "./routes/calculo.route.js";
 
+
 const app = express();
-dotenv.config();
 
 app.use(cors());
 
