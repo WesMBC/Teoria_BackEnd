@@ -1,15 +1,16 @@
-import { Schema, model } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 
 
+//const arregloValores = new Schema ( {valores:mongoose.Types.Decimal128})
 
 const Simulacionschema = new Schema(
     {
         autor:      String,
         //fecha:      Date,
-        kValues:    Number,
-        yValues:    Number,
-        iValues:    Number,
-        depValues:  Number,
+        kValues:    [mongoose.Types.Decimal128],
+        yValues:    [mongoose.Types.Decimal128],
+        iValues:    [mongoose.Types.Decimal128],
+        depValues:  [mongoose.Types.Decimal128],
 
     }
 )

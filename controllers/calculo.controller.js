@@ -35,7 +35,6 @@ export const calcIndividual = async (req, res) => {
     const g = parseFloat(respuestasForm[3]);
     const alpha = parseFloat(respuestasForm[4]);
 
-    console.log(s, d, n, g, alpha);
 
     // Funciones del modelo de Solow
     const y = (k) => Math.pow(k, alpha); // Output por trabajador
@@ -62,10 +61,10 @@ export const calcIndividual = async (req, res) => {
 
     const nuevasimulacion = new simulacion ({
         autor:      "Weslingo",
-        kValues:    23,
-        yValues:    23,
-        iValues:    23,
-        depValues:  23,
+        kValues:    kValues,
+        yValues:    yValues,
+        iValues:    iValues,
+        depValues:  depValues,
     })
     await nuevasimulacion.save();
 
