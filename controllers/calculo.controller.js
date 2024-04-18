@@ -54,20 +54,6 @@ export const calcIndividual = async (req, res) => {
       depValues: depValues,
     };
 
-    //console.log(kValues);
-    //console.log("respuesta", respuesta);
-
-    //Guardado en la base de datos
-
-    const nuevasimulacion = new simulacion ({
-        autor:      "Weslingo",
-        kValues:    kValues,
-        yValues:    yValues,
-        iValues:    iValues,
-        depValues:  depValues,
-    })
-    await nuevasimulacion.save();
-
     
 
     return res.status(200).json({ respuesta });
@@ -77,3 +63,69 @@ export const calcIndividual = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
+
+export const saveSimulacion =  async (req,res) => {
+  try {
+    const respuestasForm = [];
+    forEach(req.query, async (conetnido) => {
+      respuestasForm.push(conetnido);
+    });
+    
+    
+    //Guardado en la base de datos
+
+    const numeroDeSimulacion = await simulacion.countDocuments()
+    const fecha = new Date
+
+
+    const nuevasimulacion = new simulacion ({
+        nombre:     `simulacion ${numeroDeSimulacion+1}`,
+        fecha:      `${fecha.getDay()}/${fecha.getDate()}/${fecha.getFullYear()}`,
+        kValues:    respuestasForm[0],
+        yValues:    respuestasForm[1],
+        iValues:    respuestasForm[2],
+        depValues:  respuestasForm[3]
+    })
+    await nuevasimulacion.save();
+    
+    return res.status(200).json({mensaje: "Todo bien "})
+  } catch (error) {
+    return res.status(400).json({error: error})
+  }
+}
+
+
+export const getSimulaciones = async (req,res) => {
+  /*Funcion con el objetivo de traer la informacion general de las simulaciones guardadas en la base de datos*/
+  try {
+
+    let simulaciones = await simulacion.find().exec();
+    let informacionGeneral = []
+
+    for(const i in simulaciones){
+      informacionGeneral.push([simulaciones[i].nombre,simulaciones[i].fecha])
+    } 
+
+    return res.status(200).json({conetnido: informacionGeneral})
+  } catch (error) {
+    return res.status(500).json({message: error.message});
+  }
+
+}
+
+export const getSimulacion = async (req,res) => {
+  try {
+    const respuestasForm = [];
+    forEach(req.query, async (conetnido) => {
+      respuestasForm.push(conetnido);
+    });
+
+    const simulacionBuscada = await simulacion.find({nombre: respuestasForm[0]})
+
+    return res.status(200).json({Simulacion:simulacionBuscada})
+  } catch (error) {
+
+    return res.status(400).json(("Hubo un error: " + error.message))
+  }
+}
+

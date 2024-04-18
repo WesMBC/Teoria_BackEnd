@@ -1,5 +1,6 @@
 import 'dotenv/config'
 import "./database/conectionDB.js"
+import bodyParser from 'body-parser';
 import express, { Router } from "express";
 import cors from "cors";
 import "./database/conectionDB.js"
@@ -9,7 +10,7 @@ import { simulacion } from "./models/simulationModel.js";
 const app = express();
 
 app.use(cors());
-
+app.use(bodyParser.json())
 app.use("/Simulador", calculoRoute);
 app.listen(process.env.PORT, () =>
   console.log(
