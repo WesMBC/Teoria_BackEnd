@@ -13,6 +13,11 @@ const Simulacionschema = new Schema(
         yValues:    [mongoose.Types.Decimal128],
         iValues:    [mongoose.Types.Decimal128],
         depValues:  [mongoose.Types.Decimal128],
+        tasaAhorro: String,
+        tasaDepreciacion: String,
+        tasaCrecimientoPoblacional: String,
+        tasaProgresoTecnologico: String,
+        coeficienteElasticidad: String,
 
     }
 )

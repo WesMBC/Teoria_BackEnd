@@ -87,6 +87,13 @@ export const saveSimulacion =  async (req,res) => {
       return parseFloat(numero)
     })
 
+    let tasaAhorro = respuestasForm[4]
+    let tasaDepreciacion = respuestasForm[5]
+    let tasaCrecimientoPoblacional = respuestasForm[6]
+    let tasaProgresoTecnologico = respuestasForm[7]
+    let coeficienteElasticidad = respuestasForm[8]
+  
+
 
 
     
@@ -98,12 +105,18 @@ export const saveSimulacion =  async (req,res) => {
 
 
     const nuevasimulacion = new simulacion ({
-        nombre:     `simulacion ${numeroDeSimulacion+1}`,
+        nombre:     `simulación ${numeroDeSimulacion+1}`,
         fecha:      `${fecha.getDay()}/${fecha.getDate()}/${fecha.getFullYear()}`,
         kValues:    kValues,
         yValues:    yValues,
         iValues:    iValues,
-        depValues:  depValues
+        depValues:  depValues,
+        tasaAhorro: tasaAhorro,
+        tasaDepreciacion: tasaDepreciacion,
+        tasaCrecimientoPoblacional: tasaCrecimientoPoblacional,
+        tasaProgresoTecnologico: tasaProgresoTecnologico,
+        coeficienteElasticidad: coeficienteElasticidad
+
     })
     await nuevasimulacion.save();
     
@@ -158,11 +171,9 @@ export const borrarSimulacion = async (req,res) => {
       respuestasForm.push(conetnido);
     });
 
-    console.log(respuestasForm[0]);
-    
-    const resultado = await simulacion.find({nombre: respuestasForm[0]})
+    const resultado = await simulacion.deleteOne({nombre: respuestasForm[0]})
   
-    if(resultado == 1 || resultado == true){
+    if(resultado.deletedCount == 1 || resultado.acknowledged == true){
       return res.status(200).json({message: `Se borro la simulacion ${respuestasForm[0]}`})
     }
 
