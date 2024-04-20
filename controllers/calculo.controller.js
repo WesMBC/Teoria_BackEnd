@@ -70,6 +70,25 @@ export const saveSimulacion =  async (req,res) => {
     forEach(req.query, async (conetnido) => {
       respuestasForm.push(conetnido);
     });
+
+    let kValues = respuestasForm[0].split(',').map(function(numero) {
+      return parseFloat(numero)
+    })
+
+    let yValues = respuestasForm[1].split(',').map(function(numero) {
+      return parseFloat(numero)
+    })
+
+    let iValues = respuestasForm[2].split(',').map(function(numero) {
+      return parseFloat(numero)
+    })
+
+    let depValues = respuestasForm[3].split(',').map(function(numero) {
+      return parseFloat(numero)
+    })
+
+
+
     
     
     //Guardado en la base de datos
@@ -81,10 +100,10 @@ export const saveSimulacion =  async (req,res) => {
     const nuevasimulacion = new simulacion ({
         nombre:     `simulacion ${numeroDeSimulacion+1}`,
         fecha:      `${fecha.getDay()}/${fecha.getDate()}/${fecha.getFullYear()}`,
-        kValues:    respuestasForm[0],
-        yValues:    respuestasForm[1],
-        iValues:    respuestasForm[2],
-        depValues:  respuestasForm[3]
+        kValues:    kValues,
+        yValues:    yValues,
+        iValues:    iValues,
+        depValues:  depValues
     })
     await nuevasimulacion.save();
     
