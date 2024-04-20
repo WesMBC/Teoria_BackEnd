@@ -59,7 +59,7 @@ export const calcIndividual = async (req, res) => {
     return res.status(200).json({ respuesta });
   } catch (error) {
     console.log(error);
-    error.message = "Error al momento de ejecucion del caluclo";
+    error.message = "Error al momento de ejecucion del calculo";
     return res.status(500).json({ message: error.message });
   }
 };
@@ -146,5 +146,29 @@ export const getSimulacion = async (req,res) => {
 
     return res.status(400).json(("Hubo un error: " + error.message))
   }
+}
+
+
+
+export const borrarSimulacion = async (req,res) => {
+
+  try {
+    const respuestasForm = [];
+    forEach(req.query, async (conetnido) => {
+      respuestasForm.push(conetnido);
+    });
+
+    console.log(respuestasForm[0]);
+    
+    const resultado = await simulacion.find({nombre: respuestasForm[0]})
+  
+    if(resultado == 1 || resultado == true){
+      return res.status(200).json({message: `Se borro la simulacion ${respuestasForm[0]}`})
+    }
+
+  } catch (error) {
+    return res.status(400).json(("Hubo un error: " + error.message))
+  }
+
 }
 
